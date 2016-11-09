@@ -7,4 +7,8 @@ RUN wget http://downloads.rclone.org/rclone-current-linux-amd64.zip \
     && cp ./rclone-v*-linux-amd64/rclone /usr/sbin \
     && chown root:root /usr/sbin/rclone && chmod 755 /usr/sbin/rclone
 
-ENTRYPOINT ["rclone"]
+VOLUME ["/config"]
+
+ENTRYPOINT ["/usr/sbin/rclone", "--config", "/config/.rclone.conf"]
+
+CMD ["--version"]
